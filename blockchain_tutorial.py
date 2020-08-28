@@ -9,6 +9,35 @@ class Blockchain(object):
         
         self.new_block(previous_hash=1, proof=100)
 
+    def proof_of_work(self, last_proof):
+    
+        """This method is where you the consensus algorithm is implemented.
+
+        It takes two parameters including self and last_proof
+        """
+
+        proof = 0
+
+        while self.valid_proof(last_proof, proof) is False:
+
+            proof +=1
+
+        return proof
+
+    @staticmethod
+
+    def valid_proof(last_proof, proof):
+
+        """
+        This method validates the block
+        """
+
+        guess = f'{last_proof}{proof}'.encode()
+
+        guess_hash = hashlib.sha256(guess).hexigest()
+
+        return guess_hash[:4] == “0000”
+
         
     def new_block(self):
         
@@ -68,15 +97,21 @@ class Blockchain(object):
 
     @staticmethod
     def hash(block):
-
         #Used for hashing a block
         
+        """
+        The following code will create a SHA-256 block hash and also ensure that the dictionary is ordered
+        """
+
+        block_string = json.dumps(block, sort_keys=True).encode()
+
+        return hashlib.sha256(block_string).hexdigest()
         
     @property
     def last_block(self):
 
         # Calls and returns the last block of the chain
 
-        pass
+        return self.chain[-1]
     
     
