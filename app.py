@@ -63,7 +63,7 @@ def new_transaction():
 
 
 
-@app.router('/chain', methods=['GET'])
+@app.route('/chain', methods=['GET'])
 def full_chain():
     response = {
         'chain' : blockchain.chain,

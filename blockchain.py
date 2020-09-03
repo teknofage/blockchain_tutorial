@@ -11,7 +11,7 @@ class Blockchain(object):
         
         self.new_block(previous_hash=1, proof=100)
 
-    def new_block(self):
+    def new_block(self, proof, previous_hash=None):
         
         #This function creates new blocks and then adds to the existing chain
 
@@ -19,10 +19,11 @@ class Blockchain(object):
         This method will contain two parameters proof, previous hash
         """
         block = {
-        'index': len(self.chain) + 1,
-        'timestamp' : time(),
-        'proof': proof,
-        previous_hash: previous_hash or self.hash(self.chain[-1]),
+            'index': len(self.chain) + 1,
+            'timestamp' : time(),
+            'proof': proof,
+            previous_hash: previous_hash or self.hash(self.chain[-1]),
+        
         }
 
         # Set the current transaction list to empty.
