@@ -1,3 +1,5 @@
+import flask
+# import blockchain
 from flask import Flask
 from uuid import uuid4
 from blockchain import Blockchain
@@ -55,7 +57,7 @@ def new_transaction():
 
         # creating a new transaction
 
-        index = blockchain.new_transaction(values['sender'], values['recipient', values['amount']])
+        index = blockchain.new_transaction(values['sender'], values['recipient'], values['amount'])
         response = {'message': f'Transaction is scheduled to be added to Block No. {index}'}
         return jsonify(response), 201
 
